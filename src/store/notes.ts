@@ -18,19 +18,7 @@ export interface Note {
 const initialState: Notes = {
   tagsList: [],
   selectedTags: [],
-  list: [
-    {
-      id: '28572dda-0241-f87a-87f9-559257992401',
-      text: 'my first note #note',
-      flags: ['#note'],
-    },
-
-    {
-      id: 'ab551ff3-701c-db0b-5bfb-2eee60ad61ca',
-      text: 'my first #note 2',
-      flags: ['#my', '#note'],
-    },
-  ],
+  list: [],
 };
 
 const updateTagsList = (list: Note[]): string[] => {
