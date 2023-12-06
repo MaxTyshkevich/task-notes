@@ -1,15 +1,18 @@
 import { Box, Button, Card, Input, Typography } from '@mui/material';
 import React, { useState } from 'react';
-import { Note } from '../store/notes';
+import { Note, deleteNote } from '../store/notes';
+import { useAppDispatch } from '../store/hooks';
 
 export const NoteCard = ({ card }: { card: Note }) => {
+  const dispatch = useAppDispatch();
   const [value, setValue] = useState(card.text);
   const [isChange, setIsChange] = useState(false);
-
-  const handleUpdate = () => {
+  const handleUpdate = (id: string) => {
     setIsChange(!isChange);
   };
-  const handleDelete = () => {};
+  const handleDelete = (id: string) => {
+    dispatch(deleteNote(id));
+  };
 
   return (
     <Card
@@ -19,21 +22,30 @@ export const NoteCard = ({ card }: { card: Note }) => {
         flexDirection: 'column',
         gap: 2,
       }}
+      id={card.id}
     >
       {isChange ? (
         <Box sx={{ display: 'flex', gap: 2 }}>
-          <Button onClick={handleUpdate} variant="contained" color="success">
+          <Button
+            onClick={() => handleUpdate(card.id)}
+            variant="contained"
+            color="success"
+          >
             Update
           </Button>
           <Input value={value} />
         </Box>
       ) : (
         <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
-          <Button onClick={handleUpdate} variant="contained">
+          <Button onClick={() => handleUpdate(card.id)} variant="contained">
             Update
           </Button>
           <Typography>{value}</Typography>
-          <Button onClick={handleDelete} variant="contained" color="error">
+          <Button
+            onClick={() => handleDelete(card.id)}
+            variant="contained"
+            color="error"
+          >
             Delete
           </Button>
         </Box>

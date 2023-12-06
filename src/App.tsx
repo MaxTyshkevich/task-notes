@@ -18,6 +18,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 
 import { ListNote } from './components/ListNote';
 import AddNode from './components/AddNode';
+import { Filter } from './components/Filter';
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
         </AppBar>
         <Box>
           <AddNode />
+          <Filter />
           <ListNote />
         </Box>
       </Box>

@@ -4,8 +4,9 @@ import { RootState } from './store';
 
 // Define a type for the slice state
 export interface Notes {
-  value: string;
   list: Note[];
+  tagsList: string[];
+  selectedTags: string[];
 }
 
 export interface Note {
@@ -15,20 +16,31 @@ export interface Note {
 }
 // Define the initial state using that type
 const initialState: Notes = {
-  value: '',
+  tagsList: [],
+  selectedTags: [],
   list: [
     {
       id: '28572dda-0241-f87a-87f9-559257992401',
-      text: 'my first note',
-      flags: ['#sdfs'],
+      text: 'my first note #note',
+      flags: ['#note'],
     },
 
     {
       id: 'ab551ff3-701c-db0b-5bfb-2eee60ad61ca',
-      text: 'my first note 2',
-      flags: ['#aal'],
+      text: 'my first #note 2',
+      flags: ['#my', '#note'],
     },
   ],
+};
+
+const updateTagsList = (list: Note[]): string[] => {
+  let tags: string[] = [];
+
+  list.forEach(({ flags }: Note) => {
+    tags = tags.concat(flags);
+  });
+
+  return [...new Set(tags).values()];
 };
 
 export const noteSlice = createSlice({
@@ -36,23 +48,52 @@ export const noteSlice = createSlice({
 
   initialState,
   reducers: {
-    increment: (state) => {
-      state.value += 1;
-    },
-
-    incrementByAmount: (state, action: PayloadAction<number>) => {
-      state.value += action.payload;
-    },
     updateNote: () => {},
-    createNode: (state, action) => {
-      state.list.push(action.payload);
+    createNote: (
+      state,
+      action: {
+        payload: Note;
+        type: string;
+      }
+    ) => {
+      state.list = [action.payload, ...state.list];
+
+      /*    const updateTagslist = state.list.reduce((acc, { flags }: Note) => {
+        return [...acc, ...flags];
+      }, [] as string[]); */
+
+      state.tagsList = updateTagsList(state.list);
+    },
+    deleteNote: (
+      state,
+      action: {
+        payload: string;
+        type: string;
+      }
+    ) => {
+      state.list = state.list.filter(({ id }) => id !== action.payload);
+
+      /*  const updateTagslist = state.list.reduce((acc, { flags }: Note) => {
+        return [...acc, ...flags];
+      }, [] as string[]); */
+
+      state.tagsList = updateTagsList(state.list);
+    },
+    setfilterTags(
+      state,
+      action: {
+        payload: string[];
+        type: string;
+      }
+    ) {
+      state.selectedTags = action.payload;
     },
   },
 });
 
-export const { increment, incrementByAmount, createNode } = noteSlice.actions;
+export const { createNote, deleteNote, setfilterTags } = noteSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
-export const selectCount = (state: RootState) => state.notes.value;
+export const storeNotes = (state: RootState) => state.notes;
 
 export default noteSlice.reducer;

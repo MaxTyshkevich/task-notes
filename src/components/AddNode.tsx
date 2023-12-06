@@ -2,8 +2,15 @@ import { Box, Button } from '@mui/material';
 import Textarea from '@mui/joy/Textarea';
 import React, { FormEvent, useState } from 'react';
 import uuid from 'react-uuid';
-import { Note, createNode } from '../store/notes';
+import { Note, createNote } from '../store/notes';
 import { useAppDispatch } from '../store/hooks';
+
+const findtags = (str: string) => {
+  const reg = /#\w+/gi;
+  const tags = str.match(reg);
+
+  return tags ? tags : [];
+};
 
 const AddNode = () => {
   const [value, setValue] = useState('');
@@ -11,16 +18,14 @@ const AddNode = () => {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const id = uuid();
-
     const node: Note = {
-      id,
+      id: uuid(),
       text: value,
-      flags: [],
+      flags: findtags(value),
     };
 
     console.log({ node });
-    dispath(createNode(node));
+    dispath(createNote(node));
   };
   return (
     <Box
@@ -28,7 +33,12 @@ const AddNode = () => {
       sx={{ display: 'flex', gap: 2 }}
       onSubmit={handleSubmit}
     >
-      <Button variant="contained" color="success" type="submit">
+      <Button
+        variant="contained"
+        color="success"
+        type="submit"
+        disabled={!value}
+      >
         Create
       </Button>
       <Textarea

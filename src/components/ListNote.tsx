@@ -4,7 +4,7 @@ import { NoteCard } from './NoteCard';
 import { Box } from '@mui/material';
 
 export const ListNote = () => {
-  const { list } = useAppSelector((state) => state.notes);
+  const { list, selectedTags } = useAppSelector((state) => state.notes);
   return (
     <div>
       <Box
@@ -12,9 +12,19 @@ export const ListNote = () => {
         sx={{ display: 'flex', flexDirection: 'column' }}
         gap={3}
       >
-        {list.map((card, index) => (
-          <NoteCard card={card} key={index} />
-        ))}
+        {/*  {list
+          .filter((card) => card.flags.find((t) => selectedTags.includes(t)))
+          .map((card) => (
+            <NoteCard card={card} key={card.id} />
+          ))} */}
+
+        {selectedTags.length
+          ? list
+              .filter((card) =>
+                card.flags.find((t) => selectedTags.includes(t))
+              )
+              .map((card) => <NoteCard card={card} key={card.id} />)
+          : list.map((card) => <NoteCard card={card} key={card.id} />)}
       </Box>
     </div>
   );
