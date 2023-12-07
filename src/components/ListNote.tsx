@@ -9,15 +9,15 @@ export const ListNote = () => {
     <div>
       <Box
         component={'ul'}
-        sx={{ display: 'flex', flexDirection: 'column' }}
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'stretch',
+          padding: 0,
+          overflowY: 'scroll',
+        }}
         gap={3}
       >
-        {/*  {list
-          .filter((card) => card.flags.find((t) => selectedTags.includes(t)))
-          .map((card) => (
-            <NoteCard card={card} key={card.id} />
-          ))} */}
-
         {selectedTags.length
           ? list
               .filter((card) =>

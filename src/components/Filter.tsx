@@ -8,6 +8,8 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { setfilterTags } from '../store/notes';
+import { Typography } from '@mui/joy';
+import { Box } from '@mui/material';
 
 export const Filter = () => {
   const { tagsList } = useAppSelector((state) => state.notes);
@@ -31,16 +33,26 @@ export const Filter = () => {
   };
 
   return (
-    <div>
-      <FormControl sx={{ m: 1, width: 300 }}>
-        <InputLabel id="sort">Tags</InputLabel>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 2,
+        alignItems: 'center',
+      }}
+    >
+      <Typography component="h3">Filter Note for tags</Typography>
+      <FormControl
+        sx={{ m: 1, display: 'flex', width: '-webkit-fill-available' }}
+      >
+        <InputLabel id="sort">Selected Tags</InputLabel>
         <Select
           labelId="dsort"
           multiple
           value={selectedTag}
           onChange={handleChange}
           input={<OutlinedInput label="Name" />}
-          /* MenuProps={MenuProps} */
+          fullWidth
         >
           {tagsList.map((tag) => (
             <MenuItem key={tag} value={tag}>
@@ -49,7 +61,7 @@ export const Filter = () => {
           ))}
         </Select>
       </FormControl>
-    </div>
+    </Box>
   );
 };
 

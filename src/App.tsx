@@ -11,6 +11,8 @@ import {
   AppBar,
   Box,
   Button,
+  Container,
+  Grid,
   IconButton,
   Toolbar,
   Typography,
@@ -25,29 +27,36 @@ function App() {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <Box sx={{ flexGrow: 1 }}>
+        <Box
+          sx={{
+            flexGrow: 1,
+            display: 'flex',
+            flexDirection: 'column',
+            height: '100vh',
+            maxHeight: '100vh',
+          }}
+        >
           <AppBar position="static">
             <Toolbar>
-              <IconButton
-                size="large"
-                edge="start"
-                color="inherit"
-                aria-label="menu"
-                sx={{ mr: 2 }}
-              >
-                <MenuIcon />
-              </IconButton>
-              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                News
+              <Typography variant="h6" component="h1" sx={{ flexGrow: 1 }}>
+                My Notes!
               </Typography>
-              <Button color="inherit">Login</Button>
             </Toolbar>
           </AppBar>
-          <Box>
-            <AddNode />
-            <Filter />
-            <ListNote />
-          </Box>
+
+          <Container maxWidth="md">
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <AddNode />
+              </Grid>
+              <Grid item xs={12} sm={4}>
+                <Filter />
+              </Grid>
+              <Grid item xs={12} sm={8}>
+                <ListNote />
+              </Grid>
+            </Grid>
+          </Container>
         </Box>
       </PersistGate>
     </Provider>

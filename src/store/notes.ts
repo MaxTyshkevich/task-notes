@@ -36,7 +36,26 @@ export const noteSlice = createSlice({
 
   initialState,
   reducers: {
-    updateNote: () => {},
+    updateNote: (
+      state,
+      action: {
+        payload: {
+          id: string;
+          changedNode: Note;
+        };
+        type: string;
+      }
+    ) => {
+      state.list = state.list.map((note) => {
+        if (note.id === action.payload.id) {
+          note.text = action.payload.changedNode.text;
+          note.flags = action.payload.changedNode.flags;
+        }
+        return note;
+      });
+
+      state.tagsList = updateTagsList(state.list);
+    },
     createNote: (
       state,
       action: {
@@ -79,7 +98,8 @@ export const noteSlice = createSlice({
   },
 });
 
-export const { createNote, deleteNote, setfilterTags } = noteSlice.actions;
+export const { createNote, updateNote, deleteNote, setfilterTags } =
+  noteSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 export const storeNotes = (state: RootState) => state.notes;

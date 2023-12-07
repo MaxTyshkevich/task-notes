@@ -4,13 +4,8 @@ import React, { FormEvent, useState } from 'react';
 import uuid from 'react-uuid';
 import { Note, createNote } from '../store/notes';
 import { useAppDispatch } from '../store/hooks';
-
-const findtags = (str: string) => {
-  const reg = /#\w+/gi;
-  const tags = str.match(reg);
-
-  return tags ? tags : [];
-};
+import { findtags } from '../utils/findTags';
+import AddIcon from '@mui/icons-material/Add';
 
 const AddNode = () => {
   const [value, setValue] = useState('');
@@ -24,30 +19,34 @@ const AddNode = () => {
       flags: findtags(value),
     };
 
-    console.log({ node });
     dispath(createNote(node));
   };
   return (
-    <Box
-      component={'form'}
-      sx={{ display: 'flex', gap: 2 }}
-      onSubmit={handleSubmit}
-    >
-      <Button
-        variant="contained"
-        color="success"
-        type="submit"
-        disabled={!value}
+    <Box paddingY={2}>
+      <Box
+        component={'form'}
+        sx={{ display: 'flex', gap: 2 }}
+        onSubmit={handleSubmit}
       >
-        Create
-      </Button>
-      <Textarea
-        placeholder="Type in here…"
-        minRows={2}
-        maxRows={2}
-        value={value}
-        onChange={({ target }) => setValue(target.value)}
-      />
+        <Button
+          sx={{ alignSelf: 'flex-start' }}
+          variant="contained"
+          color="success"
+          type="submit"
+          disabled={!value}
+          startIcon={<AddIcon />}
+        >
+          Add
+        </Button>
+        <Textarea
+          sx={{ flexGrow: 1 }}
+          placeholder="Type in here…"
+          minRows={2}
+          maxRows={2}
+          value={value}
+          onChange={({ target }) => setValue(target.value)}
+        />
+      </Box>
     </Box>
   );
 };

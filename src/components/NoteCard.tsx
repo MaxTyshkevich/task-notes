@@ -1,13 +1,34 @@
-import { Box, Button, Card, Input, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  Card,
+  IconButton,
+  Input,
+  Typography,
+} from '@mui/material';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 import React, { useState } from 'react';
-import { Note, deleteNote } from '../store/notes';
+import { Note, deleteNote, updateNote } from '../store/notes';
 import { useAppDispatch } from '../store/hooks';
+import { findtags } from '../utils/findTags';
+import uuid from 'react-uuid';
 
 export const NoteCard = ({ card }: { card: Note }) => {
   const dispatch = useAppDispatch();
   const [value, setValue] = useState(card.text);
   const [isChange, setIsChange] = useState(false);
+
   const handleUpdate = (id: string) => {
+    if (isChange) {
+      const changedNode: Note = {
+        id: uuid(),
+        text: value,
+        flags: findtags(value),
+      };
+
+      dispatch(updateNote({ id, changedNode }));
+    }
     setIsChange(!isChange);
   };
   const handleDelete = (id: string) => {
@@ -26,28 +47,32 @@ export const NoteCard = ({ card }: { card: Note }) => {
     >
       {isChange ? (
         <Box sx={{ display: 'flex', gap: 2 }}>
-          <Button
+          <IconButton
+            aria-label="update"
             onClick={() => handleUpdate(card.id)}
-            variant="contained"
             color="success"
           >
-            Update
-          </Button>
-          <Input value={value} />
+            <EditIcon />
+          </IconButton>
+          <Input
+            fullWidth
+            value={value}
+            onChange={({ target: { value } }) => setValue(value)}
+          />
         </Box>
       ) : (
-        <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
-          <Button onClick={() => handleUpdate(card.id)} variant="contained">
-            Update
-          </Button>
-          <Typography>{value}</Typography>
-          <Button
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <IconButton aria-label="update" onClick={() => handleUpdate(card.id)}>
+            <EditIcon />
+          </IconButton>
+          <Typography sx={{ flexGrow: 1 }}>{value}</Typography>
+          <IconButton
+            aria-label="delete"
             onClick={() => handleDelete(card.id)}
-            variant="contained"
             color="error"
           >
-            Delete
-          </Button>
+            <DeleteIcon />
+          </IconButton>
         </Box>
       )}
       <Box sx={{ display: 'flex' }} gap={2}>

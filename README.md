@@ -1,70 +1,25 @@
-# Getting Started with Create React App
+## Тестовое задание Front-end.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Разработать одностраничное приложение на React.js (SPA): текстовый редактор заметок с тегами.
 
-## Available Scripts
+Функционал:
 
-In the project directory, you can run:
+1. Создание, редактирование, удаление заметок;
+2. Просмотр списка заметок;
+3. Во время создания и редактирования заметки пользователь может создавать теги, используя символ # (Например, пользователь вводит текст “I wanna go to #shop tomorrow”. По мере ввода должен создаться соответствующий тег и отобразиться в списке под текстовым полем. При редактировании заметки все слова, соответствующие тегам, должны подсвечиваться, т.e. “I wanna go to #shop tomorrow”);
+4. Фильтр заметок по тегу - пользователь должен иметь возможность выбрать один или несколько тегов из существующих и по ним отфильтровать список заметок;
+5. При перезагрузке страницы заметки должны сохраняться (Например, хранить в IndexedDb).
 
-### `npm start`
+Технические требования:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1. React.js hooks;
+2. Использование TypeScript;
+3. Использование UI библиотек (Например, Material UI, Ant design);
+4. Использовать стейт менеджер (Например, Redux, MobX, прочее);
+5. Залить на гит (Публичный репозиторий);
+6. Залить на хост (Netlify, Github pages, прочее).
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+#### Если готовы выполнить тестовое задание, напишите, к какой дате оно будет выполнено, раньше - лучше.
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Прислать ссылки на Git сюда и на **career@nyblecraft.com**
+В теме писма указать "Front-end. Решение тестового задания". В теле письма ссылки на репозиторий, деплой, резюме.
