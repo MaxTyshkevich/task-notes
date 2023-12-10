@@ -6,15 +6,19 @@ import { Box } from '@mui/material';
 export const ListNote = () => {
   const { list, selectedTags } = useAppSelector((state) => state.notes);
   return (
-    <div>
+    <Box
+      sx={{
+        display: 'block',
+        padding: 2,
+        overflowY: 'hidden',
+      }}
+    >
       <Box
         component={'ul'}
         sx={{
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'stretch',
           padding: 0,
-          overflowY: 'scroll',
         }}
         gap={3}
       >
@@ -26,6 +30,6 @@ export const ListNote = () => {
               .map((card) => <NoteCard card={card} key={card.id} />)
           : list.map((card) => <NoteCard card={card} key={card.id} />)}
       </Box>
-    </div>
+    </Box>
   );
 };

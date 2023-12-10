@@ -1,35 +1,40 @@
-import '@fontsource/roboto/300.css';
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
-
-import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
-import { store, persistor } from './store/store';
 import React from 'react';
 import {
   AppBar,
   Box,
-  Button,
   Container,
+  CssBaseline,
   Grid,
-  IconButton,
+  PaletteMode,
+  ThemeProvider,
   Toolbar,
   Typography,
+  useMediaQuery,
 } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
-
 import { ListNote } from './components/ListNote';
 import AddNode from './components/AddNode';
 import { Filter } from './components/Filter';
+import { AppWrapper } from './components/AppWrapper';
+import { customTheme } from './theme/theme';
 
 function App() {
+  const prefersDarkMode: PaletteMode = useMediaQuery(
+    '(prefers-color-scheme: dark)'
+  )
+    ? 'dark'
+    : 'light';
+
+  const theme = React.useMemo(
+    () => customTheme(prefersDarkMode),
+    [prefersDarkMode]
+  );
   return (
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
+    <AppWrapper>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+
         <Box
           sx={{
-            flexGrow: 1,
             display: 'flex',
             flexDirection: 'column',
             height: '100vh',
@@ -38,7 +43,7 @@ function App() {
         >
           <AppBar position="static">
             <Toolbar>
-              <Typography variant="h6" component="h1" sx={{ flexGrow: 1 }}>
+              <Typography variant="h6" component="h1">
                 My Notes!
               </Typography>
             </Toolbar>
@@ -58,8 +63,8 @@ function App() {
             </Grid>
           </Container>
         </Box>
-      </PersistGate>
-    </Provider>
+      </ThemeProvider>
+    </AppWrapper>
   );
 }
 

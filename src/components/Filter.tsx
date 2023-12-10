@@ -39,11 +39,16 @@ export const Filter = () => {
         flexDirection: 'column',
         gap: 2,
         alignItems: 'center',
+        position: 'relative',
       }}
     >
       <Typography component="h3">Filter Note for tags</Typography>
       <FormControl
-        sx={{ m: 1, display: 'flex', width: '-webkit-fill-available' }}
+        sx={{
+          m: 1,
+          display: 'flex',
+          width: '-webkit-fill-available',
+        }}
       >
         <InputLabel id="sort">Selected Tags</InputLabel>
         <Select
@@ -52,11 +57,14 @@ export const Filter = () => {
           value={selectedTag}
           onChange={handleChange}
           input={<OutlinedInput label="Name" />}
+          sx={(theme) => ({
+            borderRadius: theme.spacing(1.5),
+          })}
           fullWidth
         >
           {tagsList.map((tag) => (
             <MenuItem key={tag} value={tag}>
-              {tag}
+              {tag.slice(1)}
             </MenuItem>
           ))}
         </Select>
@@ -66,29 +74,15 @@ export const Filter = () => {
 };
 
 /* 
-
-    <div>
-      <Select
-        defaultValue={['dog']}
-        multiple
-           onChange={handleChange} 
-        sx={{
-          minWidth: '13rem',
-        }}
-        slotProps={{
-          listbox: {
-            sx: {
-              width: '100%',
-            },
-          },
-        }}
-      >
-        {tagsList.map((tag) => (
-          <Option key={tag} value={tag}>
-            {tag}
-          </Option>
-        ))}
-      </Select>
-    </div>
+const TextArea = styled(TextareaAutosize)(({ theme }) => {
+  console.log(`${theme.spacing(1)} ${theme.spacing(2)}`);
+  return {
+    flexGrow: 1,
+    resize: 'none',
+    borderRadius: theme.spacing(1.5),
+    padding: `${theme.spacing(0.5)} ${theme.spacing(1.5)}`,
+    fontSize: '1em',
+  };
+});
 
 */

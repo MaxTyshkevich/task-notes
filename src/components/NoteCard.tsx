@@ -2,8 +2,11 @@ import {
   Box,
   Button,
   Card,
+  CardActions,
+  CardContent,
   IconButton,
   Input,
+  Tooltip,
   Typography,
 } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
@@ -38,47 +41,68 @@ export const NoteCard = ({ card }: { card: Note }) => {
   return (
     <Card
       sx={{
-        padding: 2,
         display: 'flex',
+        position: 'relative',
         flexDirection: 'column',
-        gap: 2,
+        gap: 1,
       }}
       id={card.id}
     >
-      {isChange ? (
-        <Box sx={{ display: 'flex', gap: 2 }}>
+      <CardActions sx={{ alignSelf: 'flex-end' }}>
+        <Tooltip title="Update">
           <IconButton
+            size="small"
+            color={isChange ? 'success' : 'default'}
             aria-label="update"
             onClick={() => handleUpdate(card.id)}
-            color="success"
           >
             <EditIcon />
           </IconButton>
-          <Input
-            fullWidth
-            value={value}
-            onChange={({ target: { value } }) => setValue(value)}
-          />
-        </Box>
-      ) : (
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <IconButton aria-label="update" onClick={() => handleUpdate(card.id)}>
-            <EditIcon />
-          </IconButton>
-          <Typography sx={{ flexGrow: 1 }}>{value}</Typography>
+        </Tooltip>
+
+        <Tooltip title="Delete">
           <IconButton
+            size="small"
             aria-label="delete"
             onClick={() => handleDelete(card.id)}
             color="error"
           >
             <DeleteIcon />
           </IconButton>
-        </Box>
-      )}
-      <Box sx={{ display: 'flex' }} gap={2}>
-        <Typography>tags: </Typography>
+        </Tooltip>
+      </CardActions>
+      <CardContent
+        sx={{
+          display: 'flex',
+          gap: 2,
+
+          flexDirection: 'column',
+        }}
+      >
+        {isChange ? (
+          <Input
+            fullWidth
+            value={value}
+            onChange={({ target: { value } }) => setValue(value)}
+          />
+        ) : (
+          <Typography variant="body1" sx={{ flexGrow: 1 }}>
+            {value}
+          </Typography>
+        )}
+      </CardContent>
+
+      <Box sx={{ display: 'flex', padding: 2 }} gap={2}>
+        <Typography
+          variant="caption"
+          sx={{ fontWeight: 600, textTransform: 'uppercase' }}
+        >
+          tags:{' '}
+        </Typography>
         {card.flags.map((flag, i) => (
-          <Box key={i}>{flag}</Box>
+          <Typography variant="caption" key={i}>
+            {flag}
+          </Typography>
         ))}
       </Box>
     </Card>
