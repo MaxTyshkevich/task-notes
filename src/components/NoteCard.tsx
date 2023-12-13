@@ -3,6 +3,7 @@ import {
   Card,
   CardActions,
   CardContent,
+  Divider,
   IconButton,
   Input,
   Tooltip,
@@ -46,10 +47,12 @@ export const NoteCard = ({ card }: { card: Note }) => {
         position: 'relative',
         flexDirection: 'column',
         gap: 1,
+        padding: (theme) => theme.spacing(0.5, 2, 1),
+        '& .MuiCardActions-root': {},
       }}
       id={card.id}
     >
-      <CardActions sx={{ alignSelf: 'flex-end' }}>
+      <CardActions sx={{ alignSelf: 'flex-end', p: 0 }}>
         <Tooltip title="Update">
           <IconButton
             size="small"
@@ -92,8 +95,9 @@ export const NoteCard = ({ card }: { card: Note }) => {
           </Typography>
         )}
       </CardContent>
+      <Divider />
 
-      <Box sx={{ display: 'flex', padding: 2 }} gap={2}>
+      <Box sx={{ display: 'flex' }} gap={2}>
         <Typography
           variant="caption"
           sx={{ fontWeight: 600, textTransform: 'uppercase' }}
