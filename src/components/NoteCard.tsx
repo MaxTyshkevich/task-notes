@@ -1,6 +1,5 @@
 import {
   Box,
-  Button,
   Card,
   CardActions,
   CardContent,
@@ -8,6 +7,7 @@ import {
   Input,
   Tooltip,
   Typography,
+  useTheme,
 } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -19,9 +19,10 @@ import uuid from 'react-uuid';
 
 export const NoteCard = ({ card }: { card: Note }) => {
   const dispatch = useAppDispatch();
+  /*   const theme = useTheme();
+  console.log({ ...theme.palette }); */
   const [value, setValue] = useState(card.text);
   const [isChange, setIsChange] = useState(false);
-
   const handleUpdate = (id: string) => {
     if (isChange) {
       const changedNode: Note = {
@@ -52,7 +53,7 @@ export const NoteCard = ({ card }: { card: Note }) => {
         <Tooltip title="Update">
           <IconButton
             size="small"
-            color={isChange ? 'success' : 'default'}
+            color={isChange ? 'success' : 'edit'}
             aria-label="update"
             onClick={() => handleUpdate(card.id)}
           >

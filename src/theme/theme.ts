@@ -3,9 +3,12 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
-import { Theme } from '@emotion/react';
-import { PaletteMode } from '@mui/material';
-import { createTheme, responsiveFontSizes } from '@mui/material/styles';
+import {
+  PaletteMode,
+  Theme,
+  createTheme,
+  responsiveFontSizes,
+} from '@mui/material';
 import { blue, yellow, grey, common } from '@mui/material/colors';
 
 export const customTheme = (mode: PaletteMode): Theme =>
@@ -27,11 +30,15 @@ export const customTheme = (mode: PaletteMode): Theme =>
           default: common.white,
           paper: grey[50],
         },
-
+        edit: {
+          main: yellow[300],
+        },
         action: {
           disabledBackground: '', // don't set the disable background color
           disabled: '', // set the disable foreground color
         },
+
+        contrastThreshold: 4.5,
       },
 
       components: {},

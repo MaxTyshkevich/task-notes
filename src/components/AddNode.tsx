@@ -1,4 +1,4 @@
-import { Box, Button, styled } from '@mui/material';
+import { Box, Button, styled, TextField } from '@mui/material';
 import { TextareaAutosize } from '@mui/base';
 import React, { FormEvent, useState } from 'react';
 import uuid from 'react-uuid';
@@ -6,17 +6,16 @@ import { Note, createNote } from '../store/notes';
 import { useAppDispatch } from '../store/hooks';
 import { findtags } from '../utils/findTags';
 import AddIcon from '@mui/icons-material/Add';
-import { blue } from '@mui/material/colors';
 
 const TextArea = styled(TextareaAutosize, {
   name: 'Mui-Textarea',
-  label: 'Mui-Textarea',
+  slot: 'Root',
 })(({ theme }) => {
   console.log({ theme });
-  console.log(theme.palette.text.primary);
+  console.log(theme.palette.primary.light);
   return {
     flexGrow: 1,
-    border: `solid ${theme.palette.text.secondary} 1px`,
+    border: `solid ${theme.palette.text.disabled} 1px`,
     color: theme.palette.text.secondary,
 
     fontFamily: 'Roboto',
@@ -24,14 +23,12 @@ const TextArea = styled(TextareaAutosize, {
     borderRadius: theme.spacing(1.5),
     padding: theme.spacing(2, 1.8),
     fontSize: '1em',
+    transition: theme.transitions.create('all'),
     '&:hover': {
       borderColor: theme.palette.text.primary,
     },
-    '&:focus-visible': {
-      borderColor: theme.palette.primary.light,
-    },
 
-    '&:focus': {
+    '&:focus-visible, &:focus, &:visited,&:focus-wihin': {
       borderColor: theme.palette.primary.light,
     },
   };
@@ -75,12 +72,35 @@ const AddNode = () => {
         >
           Add
         </Button>
-        <TextArea
+        {/*   <TextArea
+          sx={(theme) => ({
+            '&:focus-visible': {
+              borderColor: theme.palette.primary.light,
+            },
+
+            '&:focus': {
+              borderColor: theme.palette.primary.light,
+            },
+          })}
           placeholder="Type in here…"
           minRows={2}
           maxRows={2}
           value={value}
           onChange={({ target }) => setValue(target.value)}
+        /> */}
+        <TextField
+          fullWidth
+          multiline
+          minRows={2}
+          maxRows={2}
+          placeholder="Type in here…"
+          value={value}
+          onChange={({ target }) => setValue(target.value)}
+          sx={{
+            '& .MuiInputBase-root': {
+              borderRadius: (theme) => theme.spacing(1.5),
+            },
+          }}
         />
       </Box>
     </Box>

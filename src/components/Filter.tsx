@@ -8,7 +8,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { setfilterTags } from '../store/notes';
-import { Typography } from '@mui/joy';
+import { Typography } from '@mui/material';
 import { Box } from '@mui/material';
 
 export const Filter = () => {
@@ -42,7 +42,8 @@ export const Filter = () => {
         position: 'relative',
       }}
     >
-      <Typography component="h3">Filter Note for tags</Typography>
+      <Typography variant="h5">Filter Note for tags</Typography>
+
       <FormControl
         sx={{
           m: 1,
