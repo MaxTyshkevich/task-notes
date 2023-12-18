@@ -1,4 +1,5 @@
 import '@material-ui/core/styles';
+
 declare module '@mui/material/styles' {
   export interface Palette {
     edit: Palette['primary'];
@@ -6,6 +7,10 @@ declare module '@mui/material/styles' {
 
   export interface PaletteOptions {
     edit?: PaletteOptions['primary'];
+  }
+
+  export interface Components {
+    MyTagComponent: {};
   }
 }
 

@@ -63,11 +63,15 @@ export const Filter = () => {
           })}
           fullWidth
         >
-          {tagsList.map((tag) => (
-            <MenuItem key={tag} value={tag}>
-              {tag.slice(1)}
-            </MenuItem>
-          ))}
+          {tagsList.length ? (
+            tagsList.map((tag) => (
+              <MenuItem key={tag} value={tag}>
+                {tag.slice(1)}
+              </MenuItem>
+            ))
+          ) : (
+            <MenuItem value={'tag'}>'tag'</MenuItem>
+          )}
         </Select>
       </FormControl>
     </Box>

@@ -9,8 +9,8 @@ export const ListNote = () => {
     <Box
       sx={{
         display: 'block',
+
         padding: 2,
-        overflowY: 'hidden',
       }}
     >
       <Box
@@ -18,6 +18,7 @@ export const ListNote = () => {
         sx={{
           display: 'flex',
           flexDirection: 'column',
+          overflow: 'auto',
           padding: 0,
         }}
         gap={3}

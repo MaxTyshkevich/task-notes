@@ -41,6 +41,12 @@ export const customTheme = (mode: PaletteMode): Theme =>
         contrastThreshold: 4.5,
       },
 
-      components: {},
+      /* components: {
+        MyTagComponent: {
+          styleOverrides: {
+            root: { backgroundColor: 'red' },
+          },
+        },
+      }, */
     })
   );

@@ -8,6 +8,9 @@ import {
   Input,
   Tooltip,
   Typography,
+  TypographyOwnProps,
+  TypographyProps,
+  styled,
   useTheme,
 } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
@@ -105,11 +108,44 @@ export const NoteCard = ({ card }: { card: Note }) => {
           tags:{' '}
         </Typography>
         {card.flags.map((flag, i) => (
-          <Typography variant="caption" key={i}>
-            {flag}
-          </Typography>
+          <Tag customProp={'adasd'} key={i} variant="caption">
+            {flag.slice(1)}
+          </Tag>
         ))}
       </Box>
     </Card>
   );
 };
+
+interface TagProps {
+  customProp: string;
+}
+
+const Tag = styled(Typography, {
+  name: 'MyTagComponent',
+  slot: 'Root',
+  shouldForwardProp: (prop) => {
+    console.log(prop);
+    if (prop === 'customProp') return false;
+
+    return true;
+  },
+})<TagProps>(({ theme }, ...props) => {
+  console.log(props, theme);
+  return {
+    textTransform: 'capitalize',
+  };
+});
+
+/* const Tag = ({
+  children,
+  customProp,
+}: {
+  children: React.ReactNode;
+  customProp: boolean;
+}) => (
+  <Typography >
+    {children} {customProp}
+  </Typography>
+);
+ */
