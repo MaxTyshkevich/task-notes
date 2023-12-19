@@ -25,7 +25,9 @@ export const NoteCard = ({ card }: { card: Note }) => {
   const dispatch = useAppDispatch();
   /*   const theme = useTheme();
   console.log({ ...theme.palette }); */
+
   const [value, setValue] = useState(card.text);
+  const [arrTags, setArrTags] = useState(card.flags);
   const [isChange, setIsChange] = useState(false);
   const handleUpdate = (id: string) => {
     if (isChange) {
@@ -43,6 +45,8 @@ export const NoteCard = ({ card }: { card: Note }) => {
     dispatch(deleteNote(id));
   };
 
+  console.log(2, findtags(value));
+  console.log({ arrTags });
   return (
     <Card
       sx={{
@@ -90,7 +94,12 @@ export const NoteCard = ({ card }: { card: Note }) => {
           <Input
             fullWidth
             value={value}
-            onChange={({ target: { value } }) => setValue(value)}
+            onChange={({ target: { value } }) => {
+              console.log(`d`, findtags(value));
+              setValue(value);
+              const tags = findtags(value);
+              setArrTags(tags);
+            }}
           />
         ) : (
           <Typography variant="body1" sx={{ flexGrow: 1 }}>
@@ -107,11 +116,17 @@ export const NoteCard = ({ card }: { card: Note }) => {
         >
           tags:{' '}
         </Typography>
-        {card.flags.map((flag, i) => (
-          <Tag customProp={'adasd'} key={i} variant="caption">
-            {flag.slice(1)}
-          </Tag>
-        ))}
+        {isChange
+          ? arrTags.map((flag, i) => (
+              <Tag customProp={'adasd'} key={i} variant="caption">
+                {flag.slice(1)}
+              </Tag>
+            ))
+          : card.flags.map((flag, i) => (
+              <Tag customProp={'adasd'} key={i} variant="caption">
+                {flag.slice(1)}
+              </Tag>
+            ))}
       </Box>
     </Card>
   );
